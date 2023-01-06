@@ -11,10 +11,12 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
-  const responseGoogle = (credentialResponse) => {};
+  const responseGoogle = (credentialResponse) => {
+    console.log(credentialResponse);
+  };
 
   return (
-    <GoogleOAuthProvider clientId={import.meta.env.REACT_APP_GOOGLE_API_TOKEN}>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_REACT_APP_GOOGLE_API_TOKEN}>
       <div className="flex justify-start items-center flex-col h-screen">
         <div className="relative w-full h-full">
           <video src={shareVideo} type="video/mp4" loop controls={false} muted autoPlay className="w-full h-full object-cover" />
