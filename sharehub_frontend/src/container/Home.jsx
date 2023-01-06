@@ -16,6 +16,10 @@ import { client } from '../client';
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
+
+  // check if there's user info from localstorage, then parse the data
+  // otherwise clear the localStorage
+  const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
   return (
     <div className="flex bg-gray-50 md:flex-row flex-col h-screen transaction-height duration-75 ease-out">
       <div className="hidden md:flex h-screen flex-initial">
