@@ -11,6 +11,8 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
+  const responseGoogle = (credentialResponse) => {};
+
   return (
     <GoogleOAuthProvider clientId="">
       <div className="flex justify-start items-center flex-col h-screen">
@@ -22,7 +24,7 @@ const Login = () => {
               <img src={logo} width="130px" alt="logo" />
             </div>
             <div className="shadow-2xl">
-              <GoogleLogin />
+              <GoogleLogin onSuccess={responseGoogle} onError={responseGoogle} />
             </div>
           </div>
         </div>
