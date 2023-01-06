@@ -16,13 +16,22 @@ const Login = () => {
   const responseGoogle = (credentialResponse) => {
     // decode the secret message from credentialResponse.credential using jwt_decode
     const response = { ...jwt_decode(credentialResponse.credential) };
-    console.log(response);
 
     // save the user data to localstorage
     localStorage.setItem('user', JSON.stringify(response));
 
     // take the user name, picture and sub (unique token)
     const { name, picture, sub } = response;
+
+    console.log(name, picture, sub);
+
+    // save it into sanity user data
+    const doc = {
+      _id: sub,
+      _type: 'user',
+      userName: name,
+      image: picture,
+    };
   };
 
   return (
