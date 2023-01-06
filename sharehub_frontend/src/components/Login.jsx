@@ -7,12 +7,22 @@ import shareVideo from '../assets/share.mp4';
 import logo from '../assets/logowhite.png';
 
 // google auth
+
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
 
 const Login = () => {
   const responseGoogle = (credentialResponse) => {
-    console.log(credentialResponse);
+    // decode the secret message from credentialResponse.credential using jwt_decode
+    const response = { ...jwt_decode(credentialResponse.credential) };
+    console.log(response);
+
+    // save the user data to localstorage
+    localStorage.setItem('user', JSON.stringify(response));
+
+    // take the user name, picture and sub (unique token)
+    const { name, picture, sub } = response;
   };
 
   return (
