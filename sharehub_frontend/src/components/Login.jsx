@@ -7,12 +7,16 @@ import shareVideo from '../assets/share.mp4';
 import logo from '../assets/logowhite.png';
 
 // google auth
-
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 
+// sanity client
+import { client } from '../client';
+
 const Login = () => {
+  const navigate = useNavigate();
+
   const responseGoogle = (credentialResponse) => {
     // decode the secret message from credentialResponse.credential using jwt_decode
     const response = { ...jwt_decode(credentialResponse.credential) };
@@ -25,13 +29,16 @@ const Login = () => {
 
     console.log(name, picture, sub);
 
-    // save it into sanity user data
+    // prepare user data for saving into sanity
     const doc = {
       _id: sub,
       _type: 'user',
       userName: name,
       image: picture,
     };
+
+    // create user data into sanity
+    client.createIfNotExists(doc).then(() => navigate('/', { replace: true }));
   };
 
   return (
