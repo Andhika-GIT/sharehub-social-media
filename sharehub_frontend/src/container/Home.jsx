@@ -23,6 +23,9 @@ const Home = () => {
   // otherwise clear the localStorage
   const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
 
+  // ref for scroll
+  const scrollRef = useRef(null);
+
   useEffect(() => {
     // run the query function from data.js to get the user data based on the user sub (unique token)
     const query = userQuery(userInfo?.sub);
@@ -32,6 +35,10 @@ const Home = () => {
       // set the user state based on the first data of the array result
       setUser(data[0]);
     });
+  }, []);
+
+  useEffect(() => {
+    scrollRef.current.scrollTo(0, 0);
   }, []);
 
   return (
@@ -56,6 +63,12 @@ const Home = () => {
           <Sidebar user={user && user} closeToggle={setToggleSidebar} />
         </div>
       )}
+      <div className="pb-2 flex-1 h-screen overflow-y-scroll" ref={scrollRef}>
+        <Routes>
+          <Route path="/user-profile/:userId" element={<UserProfile />} />
+          <Route path="/*" element={<Pins user={user && user} />} />
+        </Routes>
+      </div>
     </div>
   );
 };
