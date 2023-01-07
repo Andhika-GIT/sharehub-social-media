@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 // components
-import { Sidebar, UserProfile, Pins } from '../components';
+import { Sidebar, UserProfile } from '../components';
+import Pins from './Pins';
 
 // icons
 import { HiMenu } from 'react-icons/hi';
