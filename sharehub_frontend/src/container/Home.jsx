@@ -47,7 +47,7 @@ const Home = () => {
         <Sidebar user={user && user} />
       </div>
 
-      <div className="flex md:hidden flex-row">
+      <div className="md:hidden flex flex-row">
         <div className="p-2 w-full flex flex-row justify-between items-center shadow-md">
           <HiMenu fontSize={40} className="cursor-pointer" onClick={() => setToggleSidebar(true)} />
           <Link to="/">
