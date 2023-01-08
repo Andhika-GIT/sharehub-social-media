@@ -8,7 +8,7 @@ export const userQuery = (userId) => {
 
 export const searchQuery = (searchTerm) => {
   // get the posts from the user search, based on the title or category that matches the user search
-  const query = `*[_type == "pin" && title match '${searchTerm}*' || category match '${searchTerm}*' || about match '${searchTerm}*']{
+  const query = `*[_type == 'pin' && title match '${searchTerm}*' || category match '${searchTerm}*' || about match '${searchTerm}*']{
     image {
       asset -> {
         url
@@ -33,3 +33,26 @@ export const searchQuery = (searchTerm) => {
 
   return query;
 };
+
+export const feedQuery = `*[_type == 'pin'] | order(_createdAt desc) {
+  image {
+    asset -> {
+      url
+    }
+  },
+  _id,
+  destination,
+  postedBy -> {
+    _id
+    userName,
+    image
+  },
+  save[] {
+    _key,
+    postedBy -> {
+      _id,
+      userName,
+      image
+    },
+  },
+}`;
