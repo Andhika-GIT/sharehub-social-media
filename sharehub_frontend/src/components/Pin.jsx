@@ -32,7 +32,12 @@ const Pin = ({ pin: { postedBy, image, _id, destination } }) => {
           <div className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50" style={{ height: '100%' }}>
             <div className="flex items-center justify-between">
               <div className="flex gap-2">
-                <a href={`${image?.asset?.url}?dl=`} className="bg-white w-9 h-9 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none" download>
+                <a
+                  href={`${image?.asset?.url}?dl=`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="bg-white w-9 h-9 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none"
+                  download
+                >
                   <MdDownloadForOffline />
                 </a>
               </div>
