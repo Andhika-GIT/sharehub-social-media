@@ -18,7 +18,6 @@ import { fetchUser } from '../utils/fetchUser';
 const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   // when users hover their mouse into one of the pin image post
   const [postHovered, setPostHovered] = useState(false);
-  const [savingPost, setSavingPost] = useState(false);
 
   const navigate = useNavigate();
 
@@ -39,8 +38,6 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
     // check if alreadySaved is not true
     // which means the user haven't saved the post yet
     if (!alreadySaved) {
-      setSavingPost(true);
-
       client
         // update the save collection document schema based on the receiving id
         .patch(id)
@@ -64,7 +61,6 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
         .commit()
         .then(() => {
           window.location.reload();
-          setSavingPost(false);
         });
     }
   };
