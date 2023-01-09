@@ -22,6 +22,8 @@ const CreatePin = ({ user }) => {
   const [imageAsset, setImageAsset] = useState(null);
   const [wrongImageType, setWrongImageType] = useState(false);
 
+  const navigate = useNavigate();
+
   return <div>CreatePin</div>;
 };
 
