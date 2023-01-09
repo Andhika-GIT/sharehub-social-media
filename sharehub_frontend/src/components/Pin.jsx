@@ -137,7 +137,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
           </div>
         )}
       </div>
-      <Link to={`user-profile/${user?._id}`} className="flex gap-2 mt-2 items-center">
+      <Link to={`user-profile/${postedBy?._id}`} className="flex gap-2 mt-2 items-center">
         <img className="w-8 h-8 rounded-full object-cever" src={postedBy?.image} alt="user-profile" />
         <p className="font-semibold capitalize">{postedBy?.userName}</p>
       </Link>
