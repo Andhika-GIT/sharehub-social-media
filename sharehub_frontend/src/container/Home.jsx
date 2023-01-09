@@ -16,13 +16,15 @@ import logo from '../assets/logo.png';
 import { client } from '../client';
 import { userQuery } from '../utils/data';
 
+// util
+import { fetchUser } from '../utils/fetchUser';
+
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const [user, setUser] = useState(null);
 
-  // check if there's user info from localstorage, then parse the data
-  // otherwise clear the localStorage
-  const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
+  // call the fetchUser util method to get user data from localstorage
+  const userInfo = fetchUser();
 
   // ref for scroll
   const scrollRef = useRef(null);
