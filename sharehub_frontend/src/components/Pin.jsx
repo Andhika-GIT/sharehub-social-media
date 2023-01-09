@@ -34,6 +34,41 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
 
   const alreadySaved = !!save?.filter((item) => item.postedBy._id === user.sub)?.length;
 
+  // method when user clicked the save button
+  const savePin = (id) => {
+    // check if alreadySaved is not true
+    // which means the user haven't saved the post yet
+    if (!alreadySaved) {
+      setSavingPost(true);
+
+      client
+        // update the save collection document schema based on the receiving id
+        .patch(id)
+        // if id is missing, set the save document to null array
+        .setIfMissing({ save: [] })
+        // insert the data into save document schema
+        // save[-1] -> insert the data at the end
+        .insert('after', 'save[-1]', [
+          {
+            _key: uuidv4(), // generate unique id
+            userId: user.sub,
+            postedBy: {
+              // also insert into postedBy document schema
+              _type: 'postedBy',
+              // refrence to user.sub (user unique google id)
+              _ref: user.sub,
+            },
+          },
+        ])
+        // when we insert data don't using sanity, we have to commit
+        .commit()
+        .then(() => {
+          window.location.reload();
+          setSavingPost(false);
+        });
+    }
+  };
+
   return (
     <div className="m-2">
       <div
@@ -61,7 +96,14 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                   {save?.length} saved
                 </button>
               ) : (
-                <button onClick={(e) => e.stopPropagation()} type="button" className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outlined-none">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    savePin(_id);
+                  }}
+                  type="button"
+                  className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outlined-none"
+                >
                   save
                 </button>
               )}
