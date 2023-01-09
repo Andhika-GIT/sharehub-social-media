@@ -12,12 +12,27 @@ import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 // sanity client
 import { client, urlFor } from '../client';
 
-const Pin = ({ pin: { postedBy, image, _id, destination } }) => {
+// util
+import { fetchUser } from '../utils/fetchUser';
+
+const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   // when users hover their mouse into one of the pin image post
   const [postHovered, setPostHovered] = useState(false);
   const [savingPost, setSavingPost] = useState(false);
 
   const navigate = useNavigate();
+
+  // get the user data using from localstorage using fetchUser util
+  const user = fetchUser();
+
+  // check if the postedBy.id is equal to user sub (sub -> google unique id that we get from localstorage)
+  // using length and !! to create logic that return true if the postedBy.id is equal to user.sub
+  // because by default, filter only return array data not boolean
+
+  // 1,[2,3,1] -> [1].length -> 1 -> !1 -> false -> !false -> true
+  // 1,[2,3,1] -> [].length -> 0 -> !0 -> true -> !true -> false
+
+  const alreadySaved = !!(save?.filter((item) => item.postedBy._id === user.sub)).length;
 
   return (
     <div className="m-2">
@@ -41,6 +56,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination } }) => {
                   <MdDownloadForOffline />
                 </a>
               </div>
+              {alreadySaved ? <button>saved</button> : <button>save</button>}
             </div>
           </div>
         )}
