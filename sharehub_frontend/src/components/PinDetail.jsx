@@ -16,8 +16,6 @@ const PinDetail = ({ user }) => {
 
   const { pinId } = useParams();
 
-  if (!pinDetail) return <Spinner message="loading pin..." />;
-
   const fetchPinDetails = () => {
     // run query to search for spesific pin based on the pinId
     const query = pinDetailQuery(pinId);
@@ -43,6 +41,12 @@ const PinDetail = ({ user }) => {
         });
     }
   };
+
+  useEffect(() => {
+    fetchPinDetails();
+  }, [pinId]);
+
+  if (!pinDetail) return <Spinner message="loading pin..." />;
 
   return <div>PinDetail</div>;
 };
