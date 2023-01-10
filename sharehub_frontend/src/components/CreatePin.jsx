@@ -24,6 +24,22 @@ const CreatePin = ({ user }) => {
 
   const navigate = useNavigate();
 
+  // handling image on change or when user upload image
+  const uploadImage = (e) => {
+    const { type } = e.target.files[0];
+
+    // checking file type
+    if (type === 'image/png' || type === 'image/svg' || type === 'image/jpeg' || type === 'image/gif' || type === 'image/tiff') {
+      // if the validation complete, set the wrongImageType state to false
+      setWrongImageType(false);
+      // start loading
+      setLoading(true);
+    } else {
+      // if validation failed, set the wrongImageType state to true
+      setWrongImageType(true);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center items-center mt-5 lg:h-4/5">
       {fields && <p className="text-red-500 mb-5 text-xl transition-all duration-150 ease-in">please fill all the fields</p>}
