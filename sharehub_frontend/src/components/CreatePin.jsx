@@ -26,7 +26,8 @@ const CreatePin = ({ user }) => {
 
   // handling image on change or when user upload image
   const uploadImage = (e) => {
-    const { type } = e.target.files[0];
+    // using destructuring to get the file type and name
+    const { type, name } = e.target.files[0];
 
     // checking file type
     if (type === 'image/png' || type === 'image/svg' || type === 'image/jpeg' || type === 'image/gif' || type === 'image/tiff') {
@@ -34,6 +35,17 @@ const CreatePin = ({ user }) => {
       setWrongImageType(false);
       // start loading
       setLoading(true);
+
+      // upload the image using sanity client
+      client.assets
+        .upload('image', e.target.files[0], { contentType: type, filename: name })
+        .then((document) => {
+          setImageAsset(document);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log('Image upload error', error);
+        });
     } else {
       // if validation failed, set the wrongImageType state to true
       setWrongImageType(true);
