@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 // sanity
 import { client } from '../client';
+import { categories } from '../utils/data';
 
 // react spinner
 import Spinner from './Spinner';
@@ -95,6 +96,21 @@ const CreatePin = ({ user }) => {
           )}
           <input type="text" value={about} onChange={(e) => setAbout(e.target.value)} placeholder="what is your pin about" className="outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2" />
           <input type="text" value={destination} onChange={(e) => setDestination(e.target.value)} placeholder="add a destination link" className="outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2" />
+          <div className="flex flex-col">
+            <div>
+              <p className="mb-2 font-semibold text-lg sm:text-xl">Choose Pin Category</p>
+              <select className="outline-none w-4/5 text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer" onChange={(e) => setCategory(e.target.value)}>
+                <option value="other" className="bg-white">
+                  Select Category
+                </option>
+                {categories.map((category) => (
+                  <option className="text-base border-0 outline-none capitalize bg-white text-black" value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
         </div>
       </div>
     </div>
