@@ -18,7 +18,7 @@ const CreatePin = ({ user }) => {
   const [about, setAbout] = useState('');
   const [destination, setDestination] = useState('');
   const [loading, setLoading] = useState(false);
-  const [fields, setFields] = useState(null);
+  const [fields, setFields] = useState(false);
   const [category, setCategory] = useState(null);
   const [imageAsset, setImageAsset] = useState(null);
   const [wrongImageType, setWrongImageType] = useState(false);
@@ -51,6 +51,39 @@ const CreatePin = ({ user }) => {
     } else {
       // if validation failed, set the wrongImageType state to true
       setWrongImageType(true);
+    }
+  };
+
+  // handling save pin
+  const savePin = () => {
+    // check if all the state data form is not empty
+    if (title && about && destination && imageAsset?._id && category) {
+      const doc = {
+        _type: 'pin',
+        title,
+        about,
+        destination,
+        image: {
+          _type: 'image',
+          asset: {
+            _type: 'reference',
+            _ref: imageAsset._id,
+          },
+        },
+        userId: user._id,
+        postedBy: {
+          _type: 'postedBy',
+          _ref: user._id,
+        },
+        category,
+      };
+
+      client.create(doc).then(() => {
+        navigate('/');
+      });
+    } else {
+      setFields(true);
+      setTimeout(() => setFields(false), 10000);
     }
   };
 
@@ -109,6 +142,11 @@ const CreatePin = ({ user }) => {
                   </option>
                 ))}
               </select>
+            </div>
+            <div className="flex justify-end items-end mt-5">
+              <button type="button" onClick={savePin} className="bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none">
+                Save Pin
+              </button>
             </div>
           </div>
         </div>
