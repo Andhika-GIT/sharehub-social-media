@@ -6,7 +6,7 @@ import { GoogleOAuthProvider, googleLogout } from '@react-oauth/google';
 import { client } from '../client';
 import MasonryLayout from './MasonryLayout';
 import Spinner from './Spinner';
-import { userQuery } from '../utils/data';
+import { userCreatedPinsQuery, userQuery, userSavedPinsQuery } from '../utils/data';
 
 // random image from unsplash
 const randomImage = 'https://source.unsplash.com/1600x900/?nature,photography,technology,ai';
@@ -24,6 +24,7 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const { userId } = useParams();
 
+  // useEffect for fetching user data
   useEffect(() => {
     // run query to get user information based on the user id param
     const query = userQuery(userId);
@@ -34,6 +35,30 @@ const UserProfile = () => {
       setUser(data[0]);
     });
   }, [userId]);
+
+  // useEffect to display created or saved pin based on the text state
+  useEffect(() => {
+    // if the text state is 'created'
+    if (text === 'created') {
+      // get all pins that created by the current user id that logged in
+      const createdPinsQuery = userCreatedPinsQuery(userId);
+
+      // pass the query into client sanity to get all created pins
+      client.fetch(createdPinsQuery).then((data) => {
+        // insert the result created pins into pins state
+        setPins(data);
+      });
+    } else {
+      // else, get all pins that saved by the current user id that logged in
+      const savedPinsQuery = userSavedPinsQuery(userId);
+
+      // pass the query into client sanity to get all created pins
+      client.fetch(savedPinsQuery).then((data) => {
+        // insert the result created pins into pins state
+        setPins(data);
+      });
+    }
+  }, [text, userId]);
 
   const logoutHandler = () => {
     localStorage.clear();
