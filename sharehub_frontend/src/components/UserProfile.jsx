@@ -39,7 +39,7 @@ const UserProfile = () => {
   // useEffect to display created or saved pin based on the text state
   useEffect(() => {
     // if the text state is 'created'
-    if (text === 'created') {
+    if (text === 'Created') {
       // get all pins that created by the current user id that logged in
       const createdPinsQuery = userCreatedPinsQuery(userId);
 
@@ -108,6 +108,13 @@ const UserProfile = () => {
                 Saved
               </button>
             </div>
+            {pins?.length ? (
+              <div className="px-2">
+                <MasonryLayout pins={pins} />
+              </div>
+            ) : (
+              <div className="flex justify-center font-bold items-center w-full text-xl mt-2">No Pins Found!</div>
+            )}
           </div>
         </div>
       </div>
