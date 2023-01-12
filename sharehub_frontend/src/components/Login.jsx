@@ -4,7 +4,7 @@ import { FcGoogle } from 'react-icons/fc';
 
 // assets
 import shareVideo from '../assets/share.mp4';
-import logo from '../assets/logowhite.png';
+import logo from '../assets/logo_sharehub_white.png';
 
 // google auth
 import { GoogleOAuthProvider } from '@react-oauth/google';
