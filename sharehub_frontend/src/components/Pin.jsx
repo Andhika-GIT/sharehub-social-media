@@ -31,7 +31,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   // 1,[2,3,1] -> [1].length -> 1 -> !1 -> false -> !false -> true
   // 1,[2,3,1] -> [].length -> 0 -> !0 -> true -> !true -> false
 
-  const alreadySaved = !!save?.filter((item) => item.postedBy._id === user?.sub)?.length;
+  const alreadySaved = !!save?.filter((item) => item?.postedBy?._id === user?.sub)?.length;
 
   // method when user clicked the save button
   const savePin = (id) => {
