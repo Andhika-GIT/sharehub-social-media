@@ -10,7 +10,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { Link, Route, Routes } from 'react-router-dom';
 
 // assets
-import logo from '../assets/logo.png';
+import logo from '../assets/logo_sharehub.png';
 
 // sanity
 import { client } from '../client';
@@ -57,7 +57,7 @@ const Home = () => {
             <img src={logo} alt="logo" className="w-28" />
           </Link>
           <Link to={`user-profile/${user?._id}`}>
-            <img src={user?.image} alt="logo" className="w-28" />
+            <img src={user?.image} alt="logo" className="rounded-full w-10 md:w-10 lg:w-20" />
           </Link>
         </div>
         {toggleSidebar && (
