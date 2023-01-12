@@ -31,7 +31,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   // 1,[2,3,1] -> [1].length -> 1 -> !1 -> false -> !false -> true
   // 1,[2,3,1] -> [].length -> 0 -> !0 -> true -> !true -> false
 
-  const alreadySaved = !!save?.filter((item) => item.postedBy._id === user.sub)?.length;
+  const alreadySaved = !!save?.filter((item) => item.postedBy._id === user?.sub)?.length;
 
   // method when user clicked the save button
   const savePin = (id) => {
@@ -48,12 +48,12 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
         .insert('after', 'save[-1]', [
           {
             _key: uuidv4(), // generate unique id
-            userId: user.sub,
+            userId: user?.sub,
             postedBy: {
               // also insert into postedBy document schema
               _type: 'postedBy',
               // refrence to user.sub (user unique google id)
-              _ref: user.sub,
+              _ref: user?.sub,
             },
           },
         ])
@@ -121,7 +121,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                   {destination.length > 20 ? destination.slice(8, 20) : destination.slice(8)}
                 </a>
               )}
-              {postedBy?._id === user.sub && (
+              {postedBy?._id === user?.sub && (
                 <button
                   type="button"
                   onClick={(e) => {
