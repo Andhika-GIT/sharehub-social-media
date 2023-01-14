@@ -83,7 +83,8 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
         onClick={() => navigate(`/pin-detail/${_id}`)}
         className="relative cursor-zoom-in w-auto hover:shadow-lg rounded-lg overflow-hidden transition-all duration-500 ease-in-out"
       >
-        <img className="rounded-lg w-full" alt="user-post" src={urlFor(image).width(250).url()} />
+        {image && <img className="rounded-lg w-full" alt="user-post" src={urlFor(image).width(250).url()} />}
+
         {postHovered && (
           <div className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50" style={{ height: '100%' }}>
             <div className="flex items-center justify-between">
@@ -115,7 +116,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
               )}
             </div>
             <div className="flex justify-between items-center gap-2 w-full">
-              {destination && (
+              {destination?.slice(8).length > 0 && (
                 <a href={destination} target="_blank" rel="noreferrer" className="bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:100 hover:shadow-md">
                   <BsFillArrowUpRightCircleFill />
                   {destination.length > 20 ? destination.slice(8, 20) : destination.slice(8)}
@@ -137,7 +138,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
           </div>
         )}
       </div>
-      <Link to={`user-profile/${postedBy?._id}`} className="flex gap-2 mt-2 items-center">
+      <Link to={`/user-profile/${postedBy?._id}`} className="flex gap-2 mt-2 items-center" relative="path">
         <img className="w-8 h-8 rounded-full object-cever" src={postedBy?.image} alt="user-profile" />
         <p className="font-semibold capitalize">{postedBy?.userName}</p>
       </Link>
