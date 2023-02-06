@@ -81,7 +81,7 @@ export const searchQuery = (searchTerm) => {
   return query;
 };
 
-export const feedQuery = `*[_type == 'pin'] | order(_createdAt desc) {
+export const feedQuery = `*[_type == "pin"] | order(_createdAt desc) {
   image{
     asset->{
       url
@@ -102,7 +102,7 @@ export const feedQuery = `*[_type == 'pin'] | order(_createdAt desc) {
           image
         },
       },
-  } `;
+    } `;
 
 // get spesific pin based on the received pinId parameter
 export const pinDetailQuery = (pinId) => {

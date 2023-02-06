@@ -23,11 +23,11 @@ const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const [user, setUser] = useState(null);
 
-  // call the fetchUser util method to get user data from localstorage
-  const userInfo = fetchUser();
-
   // ref for scroll
   const scrollRef = useRef(null);
+
+  // call the fetchUser util method to get user data from localstorage
+  const userInfo = fetchUser();
 
   useEffect(() => {
     // run the query function from data.js to get the user data based on the user sub (unique token)
