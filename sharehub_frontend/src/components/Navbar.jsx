@@ -23,21 +23,24 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
           className="p-2 w-full bg-white outline-none"
         />
       </div>
-      <div className="flex gap-3">
-        <Link to={`user-profile/${user?._id}`} className="hidden md:block">
+      <div className="flex gap-3 items-center">
+        <Link
+          to={`user-profile/${user?._id}`}
+          className="hidden md:flex items-center w-full h-12"
+        >
           <img
             src={user.image}
             alt="user"
-            className="w-14 h-12 rounded-lg"
+            className="w-full rounded-lg"
             referrerPolicy="no-referrer"
           />
         </Link>
         <Link
           to="create-pin"
-          className="md:bg-black text-black md:text-white rounded-lg md:rounded-full w-full h-10 md:rounded-lg md:w-14 md:h-12 flex justify-center items-center gap-1 bg-gray-400 py-2 px-4"
+          className="text-black bg-slate-300 hover:text-white hover:bg-gray-800 rounded-lg w-full h-10 md:rounded-lg md:h-12 flex justify-center items-center gap-1  py-2 px-4"
         >
-          <p className="md:hidden text-md">Add</p>
-          <p className="md:hidden text-md">Photo</p>
+          <p className="text-md">Add</p>
+          <p className="text-md">Image</p>
           <IoMdAdd className="hidden md:block" />
         </Link>
       </div>

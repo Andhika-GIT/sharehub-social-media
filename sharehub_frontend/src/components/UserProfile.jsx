@@ -102,9 +102,10 @@ const UserProfile = () => {
                 {userId === user._id && (
                   <button
                     type="button"
-                    className=" bg-white p-2 rounded-full cursor-pointer outline-none shadow-md"
+                    className=" bg-white p-2 rounded-full cursor-pointer outline-none shadow-md flex gap-2 items-center"
                     onClick={logoutHandler}
                   >
+                    <p className="text-sm text-red-500">Logout</p>
                     <AiOutlineLogout color="red" fontSize={21} />
                   </button>
                 )}
