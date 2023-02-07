@@ -168,6 +168,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
           className="w-8 h-8 rounded-full object-cever"
           src={postedBy?.image}
           alt="user-profile"
+          referrerPolicy="no-referrer"
         />
         <p className="font-semibold capitalize">{postedBy?.userName}</p>
       </Link>

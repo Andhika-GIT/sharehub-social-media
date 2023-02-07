@@ -1,23 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 
 // components
-import { Sidebar, UserProfile } from '../components';
-import Pins from './Pins';
+import { Sidebar, UserProfile } from "../components";
+import Pins from "./Pins";
 
 // icons
-import { HiMenu } from 'react-icons/hi';
-import { AiFillCloseCircle } from 'react-icons/ai';
-import { Link, Route, Routes } from 'react-router-dom';
+import { HiMenu } from "react-icons/hi";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { Link, Route, Routes } from "react-router-dom";
 
 // assets
-import logo from '../assets/logo_sharehub.png';
+import logo from "../assets/logo_sharehub.png";
 
 // sanity
-import { client } from '../client';
-import { userQuery } from '../utils/data';
+import { client } from "../client";
+import { userQuery } from "../utils/data";
 
 // util
-import { fetchUser } from '../utils/fetchUser';
+import { fetchUser } from "../utils/fetchUser";
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -52,18 +52,31 @@ const Home = () => {
 
       <div className="md:hidden flex flex-row">
         <div className="p-2 w-full flex flex-row justify-between items-center shadow-md">
-          <HiMenu fontSize={40} className="cursor-pointer" onClick={() => setToggleSidebar(true)} />
+          <HiMenu
+            fontSize={40}
+            className="cursor-pointer"
+            onClick={() => setToggleSidebar(true)}
+          />
           <Link to="/">
             <img src={logo} alt="logo" className="w-28" />
           </Link>
           <Link to={`user-profile/${user?._id}`}>
-            <img src={user?.image} alt="logo" className="rounded-full w-10 md:w-10 lg:w-20" />
+            <img
+              src={user?.image}
+              alt="logo"
+              className="rounded-full w-10 md:w-10 lg:w-20"
+              referrerPolicy="no-referrer"
+            />
           </Link>
         </div>
         {toggleSidebar && (
           <div className="fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">
             <div className="absolute w-full flex justify-end items-center p-2">
-              <AiFillCloseCircle fontSize={30} className="cursor-pointer" onClick={() => setToggleSidebar(false)} />
+              <AiFillCloseCircle
+                fontSize={30}
+                className="cursor-pointer"
+                onClick={() => setToggleSidebar(false)}
+              />
             </div>
             <Sidebar user={user && user} closeToggle={setToggleSidebar} />
           </div>

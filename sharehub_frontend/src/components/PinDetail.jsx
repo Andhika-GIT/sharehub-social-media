@@ -51,8 +51,7 @@ const PinDetail = ({ user }) => {
           },
         ])
         .commit()
-        .then((data) => {
-          console.log(data);
+        .then(() => {
           fetchPinDetails();
           setComment("");
           setAddingComment(false);
@@ -76,6 +75,7 @@ const PinDetail = ({ user }) => {
               className="rounded-t-3xl rounded-b-lg"
               src={pinDetail?.image && urlFor(pinDetail?.image).url()}
               alt="user-post"
+              referrerPolicy="no-referrer"
             />
           </div>
           <div className="w-full p-5 flex-1 xl:min-w-620">
@@ -107,6 +107,7 @@ const PinDetail = ({ user }) => {
                 src={pinDetail?.postedBy.image}
                 className="w-10 h-10 rounded-full"
                 alt="user-profile"
+                referrerPolicy="no-referrer"
               />
               <p className="font-bold">{pinDetail?.postedBy.userName}</p>
             </Link>
@@ -121,6 +122,7 @@ const PinDetail = ({ user }) => {
                     src={item.postedBy?.image}
                     className="w-10 h-10 rounded-full cursor-pointer"
                     alt="user-profile"
+                    referrerPolicy="no-referrer"
                   />
                   <div className="flex flex-col">
                     <p className="font-bold">{item.postedBy?.userName}</p>
@@ -135,6 +137,7 @@ const PinDetail = ({ user }) => {
                   src={user.image}
                   className="w-10 h-10 rounded-full cursor-pointer"
                   alt="user-profile"
+                  referrerPolicy="no-referrer"
                 />
               </Link>
               <input
