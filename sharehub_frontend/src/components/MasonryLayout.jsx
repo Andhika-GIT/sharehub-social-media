@@ -1,6 +1,6 @@
-import React from 'react';
-import Masonry from 'react-masonry-css';
-import Pin from './Pin';
+import React from "react";
+import Masonry from "react-masonry-css";
+import Pin from "./Pin";
 
 const breakPointObj = {
   // show how many picture based on the different device size
@@ -10,13 +10,16 @@ const breakPointObj = {
   2000: 5,
   1200: 3,
   1000: 2,
-  500: 1,
+  500: 2,
 };
 
 const MasonryLayout = ({ pins }) => {
   return (
     <div>
-      <Masonry className="flex animate-slide-fwd" breakpointCols={breakPointObj}>
+      <Masonry
+        className="flex animate-slide-fwd"
+        breakpointCols={breakPointObj}
+      >
         {pins?.map((pin) => (
           <Pin key={pin._id} pin={pin} className="w-max" />
         ))}
